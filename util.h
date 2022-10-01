@@ -14,6 +14,9 @@ template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
 	std::set<T> s3;
+	if(s1.empty() || s2.empty()){
+		return s3;
+	}
 	typename std::set<T>::iterator it;
 	for(it = s1.begin(); it != s1.end(); ++it){
 		if(s2.find(*it) != s2.end()){

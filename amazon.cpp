@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "product.h"
 #include "db_parser.h"
+#include "mydatastore.h"
 #include "product_parser.h"
 #include "util.h"
 
@@ -29,7 +30,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 
@@ -101,15 +102,57 @@ int main(int argc, char* argv[])
             }
 	    /* Add support for other commands here */
 
+            // ADD to cart command, takes in two inputs
+            else if ( cmd == "ADD"){
+                string user;
+                ss >> user;
+                string search_number;
+                ss >> search_number;
+                int search_hit_num;
 
+                bool validSearch = true;
+                for(int i = 0; i < (int) search_number.size(); i++){
+                    if(!isdigit(search_number[i])){
+                        validSearch = false;
+                    } 
+                }
 
+                // Checks to make sure an acceptable hit number is inputted.
+                if (validSearch && search_number != ""){
+                    search_hit_num = stoi(search_number);
+                    if(search_hit_num <= (int) hits.size()){
+                        ds.addToCart(convToLower(user), hits[search_hit_num - 1]);
+                    } else {
+                        cout << "Invalid request" << endl;
+                    }
+                } else {
+                    cout << "Invalid request" << endl;
+                }
+                    
+                
+            }
 
+            // VIEWCART command. Only takes in a username
+            else if ( cmd == "VIEWCART"){
+                string user;
+                ss >> user;
+                ds.viewCart(convToLower(user));
+            }
+
+            // VIEWCART command. Only takes in a username
+            else if ( cmd == "BUYCART"){
+                string user;
+                ss >> user;
+                ds.buyCart(convToLower(user));
+            }
             else {
                 cout << "Unknown command" << endl;
             }
-        }
-
+            cout << endl;
+        }     
     }
+
+
     return 0;
 }
 

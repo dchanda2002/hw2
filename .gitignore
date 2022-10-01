@@ -1,0 +1,10 @@
+amazon.o
+user.o
+db_parser.o
+product.o
+product_parser.o
+util.o
+mydatastore.o
+book.o
+clothing.o
+movie.o

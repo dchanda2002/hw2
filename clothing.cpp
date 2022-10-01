@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Derived Clothing class from Product
 Clothing::Clothing(const std::string category, const std::string name, double price, int qty, const std::string size, const std::string brand):
 	Product(category, name, price, qty),
 	size_(size),
@@ -17,6 +18,7 @@ Clothing::~Clothing()
 
 }
 
+// getters for the two new variables
 string Clothing::getSize() const
 {
 	return size_;
@@ -27,6 +29,7 @@ string Clothing::getBrand() const
 	return brand_;
 }
 
+// find the keywords to be used for the Clothing object. Find keywords in the brand as well as the name.
 set<string> Clothing::keywords() const
 {
 	set<string> allKeys;
@@ -42,14 +45,17 @@ set<string> Clothing::keywords() const
 	return allKeys;
 }
 
+// Implement displayString() and dump() functions to output information on the Clothing instance
 string Clothing::displayString() const{
 	string priceStr = to_string(price_);
+	int endIndex = priceStr.find(".") + 3;
+	priceStr = priceStr.substr(0, endIndex);
+	
 	string qtyStr = to_string(qty_);
-	string output = "Category: " + category_ + "\nName: " + name_ + "\nPrice: " + priceStr + "\n Quantity: " + qtyStr + 
-									"\nSize: " + size_ + "\nBrand: " + brand_ + "\n";
+	string output = name_ + "\n" + "Size: " + size_ + " Brand: " + brand_ + "\n" + priceStr + " " + qtyStr + " left.";
 	return output;
 }
 
 void Clothing::dump(ostream& os) const{
-	os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << endl;
+	os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2) << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << endl;
 }

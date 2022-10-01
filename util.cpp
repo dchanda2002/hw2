@@ -15,6 +15,7 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+	rawWords = trim(rawWords);
 	std::set<string> wordsSet;
 	unsigned int currentIndex = 0;
 	for(unsigned int i = 0; i < rawWords.size(); ++i){
@@ -22,14 +23,18 @@ std::set<std::string> parseStringToWords(string rawWords)
 			int substrLength = i - currentIndex;
 			string newWord = rawWords.substr(currentIndex, substrLength);
 			if(newWord.size() > 1){
-				for(unsigned int j = 0; j < newWord.size(); ++j){
-					newWord[j] = toupper(newWord[j]);
-				}
+				newWord = convToLower(newWord);
 				wordsSet.insert(newWord);
 			}
 			currentIndex  = i + 1;
 		} 
 	}
+
+	// The last word needs to be manually added since the string has been trimmed
+	
+	string finalWord = rawWords.substr(currentIndex);
+	finalWord = convToLower(finalWord);
+	wordsSet.insert(finalWord);
 	return wordsSet;
 }
 
