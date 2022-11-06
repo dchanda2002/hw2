@@ -64,8 +64,9 @@ int main(int argc, char* argv[])
 
     vector<Product*> hits;
     bool done = false;
+    cout << endl;
     while(!done) {
-        cout << "\nEnter command: " << endl;
+        cout << "Enter command: " << endl;
         string line;
         getline(cin,line);
         stringstream ss(line);
@@ -149,7 +150,7 @@ int main(int argc, char* argv[])
                 cout << "Unknown command" << endl;
             }
             cout << endl;
-        }     
+        }    
     }
 
 

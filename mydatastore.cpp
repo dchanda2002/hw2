@@ -145,11 +145,10 @@ void MyDataStore::viewCart(string username){
 		int count = 1;
 		vector<Product*>::iterator it;
 		vector<Product*> cart = *usersCartMap[u];
-		cout << "Current Cart: " << endl;
 		for(it = cart.begin(); it != cart.end(); ++it){
-			cout << "\nItem " << count << ": " << endl;
+			cout << "Item " << count << endl;
 			string productInfo = (*it)->displayString();
-			cout << productInfo << endl;
+			cout << productInfo << "\n" << endl;
 			count++;
 		}
 	}
